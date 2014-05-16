@@ -85,6 +85,7 @@ function updateDegrees(addrstr, rightleft) {
 // Update left temperature
 function updateLeftTemp() {
     if (funclock === 0) {
+        funclock = 1;
         updateDegrees($("#leftform").val(), 'left');
     } else {
         console.log("LOCKED -- Waiting...");
@@ -94,6 +95,7 @@ function updateLeftTemp() {
 // Update right temperature
 function updateRightTemp() {
     if (funclock === 0) {
+        funclock = 1;
         updateDegrees($("#rightform").val(), 'right');
     } else {
         console.log("LOCKED -- Waiting...");
