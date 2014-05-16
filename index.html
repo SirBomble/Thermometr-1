@@ -1,0 +1,52 @@
+<!doctype html>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/thermometr.css">
+  <script src="js/jquery.min.js" type="text/javascript"></script>
+  <script src="js/main.js" type="text/javascript"></script>
+</head>
+<body>
+  <div class="nav">
+    <div class="nav-wrap">Thermometr</div>
+  </div>
+  <div class="wrap">
+  <div class="left">
+    <div class="container">
+      <div class="de">
+          <div class="den">
+          </div>
+            <div class="dene">
+              <div class="denem">
+                <div class="deneme">
+                  0<span>.0</span><strong>&deg;</strong>
+                </div>
+              </div>
+            </div>
+      </div>
+      <div class="search">
+        <input type="search" id="leftform" placeholder="Enter your zipcode..." required>
+        <button type="submit" onclick='updateLeftTemp();'>Go</button>
+      </div>   
+    </div>
+  </div>
+  <div class="right">
+    <div class="container">
+      <div class="de">
+          <div class="den">
+          </div>
+            <div class="dene">
+              <div class="denem">
+                <div class="deneme">
+                  0<span>.0</span><strong>&deg;</strong>
+                </div>
+              </div>
+            </div>
+      </div>
+      <div class="search">
+        <input type="search" id="rightform" placeholder="Enter other zipcode..." required>
+        <button type="submit" onclick='updateRightTemp();'>Go</button>
+      </div>   
+    </div>
+  </div>
+  </div>
+</body>
+</html>
