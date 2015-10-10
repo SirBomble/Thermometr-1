@@ -74,6 +74,11 @@ function updateDegrees(addrstr, rightleft) {
         putDegrees('right', 69.69);
         return;
     }
+    if (addrstr == "Rule 34") { // ?????
+        putDegrees('left', 34);
+        putDegrees('right', 34);
+        return;
+    }
     $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addrstr,
         function (data) { // Get latitude and longitude from query
             var lat = data.results[0].geometry.location.lat;
