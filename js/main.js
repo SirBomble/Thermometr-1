@@ -59,7 +59,7 @@ function putDegrees(rightleft, tempfaren) {
 // Fetch & update degrees for lat/lon location
 function fetchDegreesLatLon(lat, lon, rightleft) {
     $.ajax({
-        url: 'http://api.wunderground.com/api/' + api_key + '/conditions/q/' + lat + ',' + lon + '.json',
+        url: 'https://api.wunderground.com/api/' + api_key + '/conditions/q/' + lat + ',' + lon + '.json',
         dataType: "jsonp",
         success: function (parsed_json) {
             putDegrees(rightleft, Math.floor(parsed_json.current_observation.temp_f));
@@ -74,7 +74,12 @@ function updateDegrees(addrstr, rightleft) {
         putDegrees('right', 69.69);
         return;
     }
-    $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addrstr,
+    if (addrstr == "Rule 34") { // ?????
+        putDegrees('left', 34);
+        putDegrees('right', 34);
+        return;
+    }
+    $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + addrstr,
         function (data) { // Get latitude and longitude from query
             var lat = data.results[0].geometry.location.lat;
             var lon = data.results[0].geometry.location.lng;
