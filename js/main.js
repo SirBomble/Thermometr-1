@@ -1,11 +1,11 @@
-/********************************************* 
+/*********************************************
   Thermometr Source Code
   -Josh Max
 **********************************************/
 var $elie = $('.den'),
     degree = 0,
     timer;
-var api_key = '0d281734e91174e9';
+var api_key = 'b849ad91010388ed464b4ef7bde5b448';
 var funclock = 0;
 var opacity_counter = 0;
 
@@ -39,7 +39,7 @@ function changeBackground(leftright, temp_f) {
         // ^Dammit who put this comment here?
         opacity_counter++;
         if (opacity_counter >= 10 && opacity_counter <= 50) { // Slowly fade in
-            $('.' + leftright + ' .container').css({
+            $('.' + leftright).css({
                 'background-color': 'rgba(' + red + ',' + green + ',' + blue + ',0.' + opacity_counter + ')'
             });
         } else if (opacity_counter > 50) {
@@ -56,14 +56,21 @@ function putDegrees(rightleft, tempfaren) {
     $('.' + rightleft + ' .deneme').html(tempfaren + '&deg;');
 }
 
-// Fetch & update degrees for lat/lon location
-function fetchDegreesLatLon(lat, lon, rightleft) {
+// Fetch & update degrees for zip location
+function fetchDegreesLatLon(zip, rightleft) {
     $.ajax({
-        url: 'https://api.wunderground.com/api/' + api_key + '/conditions/q/' + lat + ',' + lon + '.json',
+        url: 'https://api.openweathermap.org/data/2.5/weather?zip=' + zip + ',us&APPID=' + api_key,
         dataType: "jsonp",
         success: function (parsed_json) {
-            putDegrees(rightleft, Math.floor(parsed_json.current_observation.temp_f));
-            changeBackground(rightleft, Math.floor(parsed_json.current_observation.temp_f));
+            //Kelvin to Fahrenheit
+            function temp() {
+              k = Math.floor(parsed_json.main.temp);
+              f = (k * 9 / 5) - 459.67;
+              return Math.round(f, 2);;
+            }
+            c_temp = temp();
+            putDegrees(rightleft, c_temp);
+            changeBackground(rightleft, c_temp);
         }
     });
 }
@@ -79,12 +86,7 @@ function updateDegrees(addrstr, rightleft) {
         putDegrees('right', 34);
         return;
     }
-    $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + addrstr,
-        function (data) { // Get latitude and longitude from query
-            var lat = data.results[0].geometry.location.lat;
-            var lon = data.results[0].geometry.location.lng;
-            fetchDegreesLatLon(lat, lon, rightleft);
-        });
+    fetchDegreesLatLon(addrstr, rightleft);
 }
 
 // Update left temperature
