@@ -85,15 +85,15 @@ body {
 .left,
 .right {
     background-color: transparent;
-    width: 50%;
     height: 100%;
+    width: 50%;
+    display: grid;
+    align-items: center;
 }
 .left { float: left }
 .right { float: right }
 .container {
-    height: 100%;
-    padding-top: 30px;
-    text-align: center;
+    padding-top: .5em;
 }
 .de .den,
 .de .dene,
